@@ -1015,7 +1015,7 @@ int id action_menu_presenter 0x7f0a0006
 int id action_mode_bar 0x7f0a0061
 int id action_mode_bar_stub 0x7f0a0060
 int id action_mode_close_button 0x7f0a0049
-int id action_settings 0x7f0a00bc
+int id action_settings 0x7f0a00b9
 int id activity_chooser_view_content 0x7f0a004a
 int id adjust_height 0x7f0a0029
 int id adjust_width 0x7f0a002a
@@ -1101,7 +1101,6 @@ int id listMode 0x7f0a000e
 int id list_item 0x7f0a004e
 int id list_slidermenu 0x7f0a007e
 int id loading 0x7f0a0081
-int id lt 0x7f0a00b9
 int id mask_left 0x7f0a0087
 int id mask_right 0x7f0a0086
 int id match_parent 0x7f0a0035
@@ -1120,7 +1119,6 @@ int id pager 0x7f0a007b
 int id parentPanel 0x7f0a0051
 int id plus 0x7f0a0028
 int id production 0x7f0a0030
-int id profile_picture 0x7f0a00ba
 int id progressBar 0x7f0a0080
 int id progressWheel 0x7f0a008b
 int id progress_circular 0x7f0a0007
@@ -1180,7 +1178,6 @@ int id top_relative_layout 0x7f0a0073
 int id txtLabel 0x7f0a009f
 int id up 0x7f0a0001
 int id useLogo 0x7f0a0017
-int id user_name 0x7f0a00bb
 int id viewPager 0x7f0a007f
 int id visible 0x7f0a003e
 int id warning_frame 0x7f0a0089
@@ -1260,7 +1257,6 @@ int layout select_dialog_singlechoice_material 0x7f03003a
 int layout support_simple_spinner_dropdown_item 0x7f03003b
 int layout tab 0x7f03003c
 int layout tab_icon 0x7f03003d
-int layout testt 0x7f03003e
 int menu main 0x7f0e0000
 int raw gtm_analytics 0x7f050000
 int string Fr 0x7f0b003b

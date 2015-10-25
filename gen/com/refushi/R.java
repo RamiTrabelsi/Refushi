@@ -3593,7 +3593,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0a0061;
         public static final int action_mode_bar_stub=0x7f0a0060;
         public static final int action_mode_close_button=0x7f0a0049;
-        public static final int action_settings=0x7f0a00bc;
+        public static final int action_settings=0x7f0a00b9;
         public static final int activity_chooser_view_content=0x7f0a004a;
         public static final int adjust_height=0x7f0a0029;
         public static final int adjust_width=0x7f0a002a;
@@ -3679,7 +3679,6 @@ containing a value of this type.
         public static final int list_item=0x7f0a004e;
         public static final int list_slidermenu=0x7f0a007e;
         public static final int loading=0x7f0a0081;
-        public static final int lt=0x7f0a00b9;
         public static final int mask_left=0x7f0a0087;
         public static final int mask_right=0x7f0a0086;
         public static final int match_parent=0x7f0a0035;
@@ -3698,7 +3697,6 @@ containing a value of this type.
         public static final int parentPanel=0x7f0a0051;
         public static final int plus=0x7f0a0028;
         public static final int production=0x7f0a0030;
-        public static final int profile_picture=0x7f0a00ba;
         public static final int progressBar=0x7f0a0080;
         public static final int progressWheel=0x7f0a008b;
         public static final int progress_circular=0x7f0a0007;
@@ -3758,7 +3756,6 @@ containing a value of this type.
         public static final int txtLabel=0x7f0a009f;
         public static final int up=0x7f0a0001;
         public static final int useLogo=0x7f0a0017;
-        public static final int user_name=0x7f0a00bb;
         public static final int viewPager=0x7f0a007f;
         public static final int visible=0x7f0a003e;
         public static final int warning_frame=0x7f0a0089;
@@ -3871,7 +3868,6 @@ containing a value of this type.
         public static final int support_simple_spinner_dropdown_item=0x7f03003b;
         public static final int tab=0x7f03003c;
         public static final int tab_icon=0x7f03003d;
-        public static final int testt=0x7f03003e;
     }
     public static final class menu {
         public static final int main=0x7f0e0000;
