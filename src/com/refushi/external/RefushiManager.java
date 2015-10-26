@@ -3,6 +3,7 @@ package com.refushi.external;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -20,7 +21,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.v7.app.AlertDialog;
+//import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -30,20 +31,25 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationSet;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.TextView;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import cn.pedant.SweetAlert.SweetAlertDialog.OnSweetClickListener;
 
+
 import com.refushi.R;
+import com.refushi.adapter.CategoriesGridAdapter;
+import com.refushi.model.Category;
 
 
 public class RefushiManager {
-
+	
+	private ArrayList<Category> allCategories = new ArrayList<Category>();
 
 	private Context mContext;
 	private static RefushiManager mInstance = null;
 
-	public AlertDialog alert ;
+	//public AlertDialog alert ;
 
 	private String accessToken ;
 
@@ -58,15 +64,23 @@ public class RefushiManager {
 
 		return mInstance;
 	}
+	
 
+	public ArrayList<Category> getAllCategories() {
+		return allCategories;
+	}
 
+	
+	public void setAllCategories(ArrayList<Category> allCategories) {
+		this.allCategories = allCategories;
+	}
 
 
 	public void showPopUp(Context context, String message, String ok) {
 
 		if (context != null) {
 			// Alert dialogue
-			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+		//	AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 			// set dialog message
 
 			TextView content = new TextView(context);
@@ -77,12 +91,12 @@ public class RefushiManager {
 			content.setPadding(15, 15, 15, 15);
 
 
-			alertDialogBuilder
-			.setView(content)
-			.setCancelable(false)
-			;
+//			alertDialogBuilder
+//			.setView(content)
+//			.setCancelable(false)
+//			;
 
-			alert = alertDialogBuilder.create();
+		//	alert = alertDialogBuilder.create();
 			DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -90,21 +104,21 @@ public class RefushiManager {
 					exit();
 				}
 			};
-			alert.setButton(DialogInterface.BUTTON_POSITIVE, ok, listener);
-			alert.setOnShowListener(new DialogInterface.OnShowListener() {
-				@Override
-				public void onShow(DialogInterface dialog) {
-					AlertDialog alertDialog = (AlertDialog) dialog;
-					Button btn = alertDialog.getButton(Dialog.BUTTON_POSITIVE);
-					btn.setTextSize(TypedValue.COMPLEX_UNIT_SP,17);
-					btn.setTypeface(RefushiFonts.getPetitaLight());
-					btn.setGravity(Gravity.CENTER);
-
-				}
-			});
+			// alert.setButton(DialogInterface.BUTTON_POSITIVE, ok, listener);
+//			// alert.setOnShowListener(new DialogInterface.OnShowListener() {
+//				@Override
+//				public void onShow(DialogInterface dialog) {
+//					AlertDialog alertDialog = (AlertDialog) dialog;
+//					Button btn = alertDialog.getButton(Dialog.BUTTON_POSITIVE);
+//					btn.setTextSize(TypedValue.COMPLEX_UNIT_SP,17);
+//					btn.setTypeface(RefushiFonts.getPetitaLight());
+//					btn.setGravity(Gravity.CENTER);
+//
+//				}
+//			});
 
 			// show it
-			alert.show();
+		//	alert.show();
 		}
 	}
 
@@ -127,9 +141,9 @@ public class RefushiManager {
 
 				Log.w("isConnected", "isConnected");
 
-				if(alert != null && alert.isShowing())
-					alert.dismiss();
-
+//				if(alert != null && alert.isShowing())
+//					alert.dismiss();
+//l
 				break;
 
 

@@ -22,6 +22,7 @@ import android.widget.ListView;
 import com.refushi.adapter.NavDrawerListAdapter;
 import com.refushi.fragments.Fragment1NaviagationDrawer;
 import com.refushi.fragments.Fragment2NaviagationDrawer;
+import com.refushi.fragments.Fragment3NaviagationDrawer;
 import com.refushi.fragments.HomeFragmentNaviagationDrawer;
 import com.refushi.model.NavDrawerItem;
  
@@ -180,16 +181,16 @@ public class MainActivity extends Activity {
 		Fragment fragment = null;
 		switch (position) {
 		case 0:
-			fragment = new HomeFragmentNaviagationDrawer();
+			fragment = new Fragment3NaviagationDrawer();
 			break;
 		case 1:
-			fragment = new Fragment1NaviagationDrawer();
+			fragment = new Fragment3NaviagationDrawer();
 			break;
 		case 2:
-			fragment = new Fragment2NaviagationDrawer();
+			fragment = new Fragment3NaviagationDrawer();
 			break;
 		case 3:
-			fragment = new Fragment2NaviagationDrawer();
+			fragment = new Fragment3NaviagationDrawer();
 			break;
 		case 4:
 			fragment = new Fragment2NaviagationDrawer();

@@ -51,7 +51,7 @@ public class SplashScreen extends Activity {
 		public void handleMessage(Message msg) {
 
 
-
+//oioioiokjkjkj
 			loadCategories();
 
 			super.handleMessage(msg);
@@ -96,6 +96,7 @@ public class SplashScreen extends Activity {
 						mCategory.setName(json.getString("name"));
 
 						Log.e("22222222","2222222222" +mCategory.toString());
+						Log.e("22222	","2222222222" +mCategory.toString());
 
 					}
 

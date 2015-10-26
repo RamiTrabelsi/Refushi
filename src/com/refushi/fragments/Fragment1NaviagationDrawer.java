@@ -16,7 +16,7 @@ public class Fragment1NaviagationDrawer extends Fragment  {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-  
+  //jhjhjh
         View rootView = inflater.inflate(R.layout.navigation_fragment1, container, false);
           
         return rootView;
