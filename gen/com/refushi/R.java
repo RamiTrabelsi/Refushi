@@ -3199,7 +3199,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f080045;
         public static final int action_mode_bar_stub=0x7f080044;
         public static final int action_mode_close_button=0x7f080037;
-        public static final int action_settings=0x7f080093;
+        public static final int action_settings=0x7f080094;
         public static final int activity_chooser_view_content=0x7f080038;
         public static final int always=0x7f080021;
         public static final int back=0x7f080014;
@@ -3211,7 +3211,7 @@ containing a value of this type.
         public static final int btn_no_thanx=0x7f080081;
         public static final int buttonLayout=0x7f080088;
         public static final int cancel_button=0x7f080071;
-        public static final int category_img=0x7f08008e;
+        public static final int category_img=0x7f08008f;
         public static final int checkbox=0x7f080040;
         public static final int close=0x7f080015;
         public static final int collapseActionView=0x7f080022;
@@ -3250,6 +3250,7 @@ containing a value of this type.
         public static final int fab_expand_menu_button=0x7f08000d;
         public static final int fab_label=0x7f08000e;
         public static final int frame_container=0x7f080060;
+        public static final int gridView=0x7f08008d;
         public static final int home=0x7f080002;
         public static final int homeAsUp=0x7f08001c;
         public static final int hybrid=0x7f08000f;
@@ -3257,7 +3258,7 @@ containing a value of this type.
         public static final int icon_viewpager=0x7f08007d;
         public static final int ifRoom=0x7f080023;
         public static final int image=0x7f08003a;
-        public static final int img=0x7f08008d;
+        public static final int img=0x7f08008e;
         public static final int invisible=0x7f08002b;
         public static final int item_dialog_list_item=0x7f080083;
         public static final int left=0x7f08000b;
@@ -3265,7 +3266,7 @@ containing a value of this type.
         public static final int list_item=0x7f08003c;
         public static final int list_slidermenu=0x7f080061;
         public static final int loading=0x7f080064;
-        public static final int lt=0x7f080090;
+        public static final int lt=0x7f080091;
         public static final int mask_left=0x7f08006a;
         public static final int mask_right=0x7f080069;
         public static final int material_background=0x7f080084;
@@ -3278,7 +3279,7 @@ containing a value of this type.
         public static final int normal=0x7f080011;
         public static final int pager=0x7f08005e;
         public static final int plus=0x7f080017;
-        public static final int profile_picture=0x7f080091;
+        public static final int profile_picture=0x7f080092;
         public static final int progressBar=0x7f080063;
         public static final int progressWheel=0x7f08006e;
         public static final int progress_circular=0x7f080009;
@@ -3313,7 +3314,7 @@ containing a value of this type.
         public static final int tabMode=0x7f08001a;
         public static final int terrain=0x7f080013;
         public static final int text=0x7f08008b;
-        public static final int textView1=0x7f08008f;
+        public static final int textView1=0x7f080090;
         public static final int text_viewpager=0x7f08007f;
         public static final int title=0x7f08003e;
         public static final int title_text=0x7f08006f;
@@ -3325,7 +3326,7 @@ containing a value of this type.
         public static final int txtLabel=0x7f080082;
         public static final int up=0x7f080003;
         public static final int useLogo=0x7f080020;
-        public static final int user_name=0x7f080092;
+        public static final int user_name=0x7f080093;
         public static final int viewPager=0x7f080062;
         public static final int visible=0x7f08002c;
         public static final int warning_frame=0x7f08006c;

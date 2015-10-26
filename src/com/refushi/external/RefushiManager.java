@@ -3,6 +3,7 @@ package com.refushi.external;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -30,15 +31,20 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationSet;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.TextView;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import cn.pedant.SweetAlert.SweetAlertDialog.OnSweetClickListener;
 
+
 import com.refushi.R;
+import com.refushi.adapter.CategoriesGridAdapter;
+import com.refushi.model.Category;
 
 
 public class RefushiManager {
-
+	
+	private ArrayList<Category> allCategories = new ArrayList<Category>();
 
 	private Context mContext;
 	private static RefushiManager mInstance = null;
@@ -58,8 +64,16 @@ public class RefushiManager {
 
 		return mInstance;
 	}
+	
 
+	public ArrayList<Category> getAllCategories() {
+		return allCategories;
+	}
 
+	
+	public void setAllCategories(ArrayList<Category> allCategories) {
+		this.allCategories = allCategories;
+	}
 
 
 	public void showPopUp(Context context, String message, String ok) {
@@ -129,7 +143,7 @@ public class RefushiManager {
 
 //				if(alert != null && alert.isShowing())
 //					alert.dismiss();
-
+//l
 				break;
 
 
