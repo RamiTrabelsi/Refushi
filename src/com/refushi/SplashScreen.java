@@ -51,7 +51,7 @@ public class SplashScreen extends Activity {
 		public void handleMessage(Message msg) {
 
 
-
+//oioioiokjkjkj
 			loadCategories();
 
 			super.handleMessage(msg);
