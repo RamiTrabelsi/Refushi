@@ -3,245 +3,240 @@ package com.refushi;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
-import android.content.res.TypedArray;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.FrameLayout;
+import android.widget.GridView;
+import android.widget.TextView;
 
-import com.refushi.adapter.NavDrawerListAdapter;
-import com.refushi.fragments.Fragment1NaviagationDrawer;
-import com.refushi.fragments.Fragment2NaviagationDrawer;
-import com.refushi.fragments.Fragment3NaviagationDrawer;
-import com.refushi.fragments.HomeFragmentNaviagationDrawer;
-import com.refushi.model.NavDrawerItem;
- 
-@SuppressWarnings("deprecation")
-public class MainActivity extends Activity {
-	
+import com.refushi.adapter.MenuGridAdapter;
+import com.refushi.external.RefushiFonts;
+import com.refushi.external.RefushiManager;
+import com.refushi.fragments.FragmentAbout;
+import com.refushi.fragments.FragmentCategories;
+import com.refushi.fragments.FragmentFavorites;
+import com.refushi.fragments.FragmentHome;
+import com.refushi.fragments.FragmentMaps;
+import com.refushi.fragments.FragmentProfile;
+import com.refushi.fragments.FragmentServices;
+import com.refushi.fragments.FragmentSettings;
+import com.refushi.model.MenuGridItem;
+
+public class MainActivity extends AppCompatActivity {
+
 
 	private DrawerLayout mDrawerLayout;
-	private ListView mDrawerList;
+	private FrameLayout content_frame ;
+	private GridView mDrawerGrid;
+	private Toolbar toolbar ;
+	private RefushiManager mManager ;
 	private ActionBarDrawerToggle mDrawerToggle;
 
-	// nav drawer title
-	private CharSequence mDrawerTitle;
-
-	// used to store app title
-	private CharSequence mTitle;
-
-	// slide menu items
-	private String[] navMenuTitles;
-	private TypedArray navMenuIcons;
-
-	View view;
-	private ArrayList<NavDrawerItem> navDrawerItems;
-	private NavDrawerListAdapter adapter;
+	private ArrayList<MenuGridItem> navDrawerItems;
+	private MenuGridAdapter adapter;
+	private TextView toolbar_title;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_ACTION_BAR);
-		setContentView(R.layout.activity_main_activity_drawer);
+		setContentView(R.layout.activity_main);
 
-		mTitle = mDrawerTitle = getTitle();
-		
-//		 view=getLayoutInflater().inflate(R.layout.testt,null);
-//		 mDrawerList.addHeaderView(view);
-		 
-		// load slide menu items
-		navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
+		mManager = RefushiManager.getInstance(this);
 
-		// nav drawer icons from resources
-		navMenuIcons = getResources()
-				.obtainTypedArray(R.array.nav_drawer_icons);
+		mDrawerLayout 	= (DrawerLayout) findViewById(R.id.drawer_layout);
+		mDrawerGrid 	= (GridView) findViewById(R.id.gridView);
+		content_frame 	= (FrameLayout) findViewById(R.id.content_frame);
+		toolbar_title 	= (TextView) findViewById(R.id.toolbar_title);
 
-		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-		mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
+		//		mDrawerLayout.setScrimColor(Color.TRANSPARENT);
 
-		navDrawerItems = new ArrayList<NavDrawerItem>();
+		toolbar_title.setTypeface(RefushiFonts.getPetitaMedium());
 
-		// adding nav drawer items to array
-		// Home
-		navDrawerItems.add(new NavDrawerItem("Home", navMenuIcons.getResourceId(1, -1)));
-		// Find People
-		navDrawerItems.add(new NavDrawerItem("Services", navMenuIcons.getResourceId(1, -1)));
-		// Photos
-		navDrawerItems.add(new NavDrawerItem("Categories", navMenuIcons.getResourceId(2, -1)));
-		// Communities, Will add a counter here
-		navDrawerItems.add(new NavDrawerItem("Maps", navMenuIcons.getResourceId(3, -1)));
-		// Pages
-		navDrawerItems.add(new NavDrawerItem("Profile", navMenuIcons.getResourceId(4, -1)));
-		// What's hot, We  will add a counter here
-		navDrawerItems.add(new NavDrawerItem("Favorite", navMenuIcons.getResourceId(5, -1)));
-		navDrawerItems.add(new NavDrawerItem("Settings", navMenuIcons.getResourceId(5, -1)));
-		navDrawerItems.add(new NavDrawerItem("About", navMenuIcons.getResourceId(5, -1)));
-		
+		setActionBar();
 
-		// Recycle the typed array
-		navMenuIcons.recycle();
+		navDrawerItems = new ArrayList<MenuGridItem>();
 
-		mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
+		navDrawerItems.add(new MenuGridItem("Home",R.drawable.menu_home));
+		navDrawerItems.add(new MenuGridItem("Services",R.drawable.menu_services));
+		navDrawerItems.add(new MenuGridItem("Categories",R.drawable.menu_categories));
+		navDrawerItems.add(new MenuGridItem("Maps",R.drawable.menu_map));
+		navDrawerItems.add(new MenuGridItem("Profile",R.drawable.menu_profile));
+		navDrawerItems.add(new MenuGridItem("Favorites",R.drawable.menu_favorites));
+		navDrawerItems.add(new MenuGridItem("Settings",R.drawable.menu_settings));
+		navDrawerItems.add(new MenuGridItem("About",R.drawable.menu_about));
 
-		// setting the nav drawer list adapter
-		adapter = new NavDrawerListAdapter(getApplicationContext(),
-				navDrawerItems);
-		mDrawerList.setAdapter(adapter);
 
-		// enabling action bar app icon and behaving it as toggle button
-		//getActionBar().setDisplayHomeAsUpEnabled(true);
-		
-		
-		//getActionBar().setHomeButtonEnabled(true);
+		adapter = new MenuGridAdapter(MainActivity.this, navDrawerItems);
+		mDrawerGrid.setAdapter(adapter);
 
-		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-				R.drawable.btn_share, //nav menu toggle icon
-				R.string.app_name
-		) {
+		switchFragment(new FragmentHome(), false);
+
+		mDrawerGrid.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+
+				switch (position) {
+				case 0:
+					mDrawerLayout.closeDrawer(Gravity.LEFT);
+					switchFragment(new FragmentHome(), true);
+					break;
+				case 1:
+					mDrawerLayout.closeDrawer(Gravity.LEFT);
+					switchFragment(new FragmentServices(), true);
+					break;
+				case 2:
+					mDrawerLayout.closeDrawer(Gravity.LEFT);
+					switchFragment(new FragmentCategories(), true);
+					break;
+				case 3:
+					mDrawerLayout.closeDrawer(Gravity.LEFT);
+					switchFragment(new FragmentMaps(), true);
+					break;
+				case 4:
+					mDrawerLayout.closeDrawer(Gravity.LEFT);
+					switchFragment(new FragmentProfile(), true);
+					break;
+				case 5:
+					mDrawerLayout.closeDrawer(Gravity.LEFT);
+					switchFragment(new FragmentFavorites(), true);
+					break;
+				case 6:
+					mDrawerLayout.closeDrawer(Gravity.LEFT);
+					switchFragment(new FragmentSettings(), true);
+					break;
+				case 7:
+					mDrawerLayout.closeDrawer(Gravity.LEFT);
+					switchFragment(new FragmentAbout(), true);
+					break;
+
+				}
+
+
+			}
+		});
+
+
+	}
+	private void setActionBar() {
+		toolbar = (Toolbar) findViewById(R.id.toolbar);
+		toolbar.bringToFront();
+
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setTitle("");
+		getSupportActionBar().setHomeButtonEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+		mDrawerToggle = new ActionBarDrawerToggle(
+				this,                  /* host Activity */
+				mDrawerLayout,         /* DrawerLayout object */
+				toolbar,  /* nav drawer icon to replace 'Up' caret */
+				R.string.drawer_open,  /* "open drawer" description */
+				R.string.drawer_close  /* "close drawer" description */
+				) {
+
+
+			//			@Override
+			//			public boolean onOptionsItemSelected(MenuItem item) {
+			//				if (item != null && item.getItemId() == android.R.id.home) {
+			//					if (drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
+			//						drawerLayout.closeDrawer(Gravity.LEFT);
+			//					} else {
+			//						drawerLayout.openDrawer(Gravity.RIGHT);
+			//					}
+			//				}
+			//				return false;
+			//			}
+
+
+			/** Called when a drawer has settled in a completely closed state. */
 			public void onDrawerClosed(View view) {
-			//	getActionBar().setTitle(mTitle);
-				// calling onPrepareOptionsMenu() to show action bar icons
-				invalidateOptionsMenu();
+				super.onDrawerClosed(view);
+				//				linearLayout.removeAllViews();
+				//				linearLayout.invalidate();
 			}
 
+			@Override
+			public void onDrawerSlide(View drawerView, float slideOffset) {
+				super.onDrawerSlide(drawerView, slideOffset);
+				//				if (slideOffset > 0.6 && linearLayout.getChildCount() == 0){
+				//					
+				//				}
+				//					viewAnimator.showMenuContent();
+			}
+
+			/** Called when a drawer has settled in a completely open state. */
 			public void onDrawerOpened(View drawerView) {
-			//	getActionBar().setTitle(mDrawerTitle);
-				// calling onPrepareOptionsMenu() to hide action bar icons
-				invalidateOptionsMenu();
+				super.onDrawerOpened(drawerView);
 			}
+
+
 		};
+
+
+		mDrawerToggle.setDrawerIndicatorEnabled(true);
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-		if (savedInstanceState == null) {
-			// on first time display view for first nav item
-			displayView(0);
-		}
 	}
-
-	/**
-	 * Slide menu item click listener
-	 * */
-	private class SlideMenuClickListener implements
-			ListView.OnItemClickListener {
-		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position,
-				long id) {
-			// display view for selected nav drawer item
-			displayView(position);
-		}
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// toggle nav drawer on selecting action bar app icon/title
-		if (mDrawerToggle.onOptionsItemSelected(item)) {
-			return true;
-		}
-		// Handle action bar actions click
-		switch (item.getItemId()) {
-		case R.id.action_settings:
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-	}
-
-	/* *
-	 * Called when invalidateOptionsMenu() is triggered
-	 */
-	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		// if nav drawer is opened, hide the action items
-		boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-		menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
-		return super.onPrepareOptionsMenu(menu);
-	}
-
-	/**
-	 * Diplaying fragment view for selected nav drawer list item
-	 * */
-	private void displayView(int position) {
-		// update the main content by replacing fragments
-		Fragment fragment = null;
-		switch (position) {
-		case 0:
-			fragment = new Fragment3NaviagationDrawer();
-			break;
-		case 1:
-			fragment = new Fragment3NaviagationDrawer();
-			break;
-		case 2:
-			fragment = new Fragment3NaviagationDrawer();
-			break;
-		case 3:
-			fragment = new Fragment3NaviagationDrawer();
-			break;
-		case 4:
-			fragment = new Fragment2NaviagationDrawer();
-			break;
-		case 5:
-			fragment = new Fragment2NaviagationDrawer();
-			break;
-
-		default:
-			break;
-		}
-
-		if (fragment != null) {
-			FragmentManager fragmentManager = getFragmentManager();
-			fragmentManager.beginTransaction()
-					.replace(R.id.frame_container, fragment).commit();
-
-			// update selected item and title, then close the drawer
-			mDrawerList.setItemChecked(position, true);
-			mDrawerList.setSelection(position);
-			setTitle(navMenuTitles[position]);
-			mDrawerLayout.closeDrawer(mDrawerList);
-		} else {
-			// error in creating fragment
-			Log.e("MainActivity", "Error in creating fragment");
-		}
-	}
-
-	@Override
-	public void setTitle(CharSequence title) {
-		mTitle = title;
-	//	getActionBar().setTitle(mTitle);
-	}
-
-	/**
-	 * When using the ActionBarDrawerToggle, you must call it during
-	 * onPostCreate() and onConfigurationChanged()...
-	 */
 
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
-		// Sync the toggle state after onRestoreInstanceState has occurred.
 		mDrawerToggle.syncState();
 	}
 
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
-		// Pass any configuration change to the drawer toggls
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
+
+
+	public void switchFragment(Fragment tab, boolean withAnimation) {
+
+		FragmentManager fm = getSupportFragmentManager();
+		Fragment fragment = fm.findFragmentById(R.id.content_frame);
+
+		FragmentTransaction ft = fm.beginTransaction();
+		if(withAnimation)
+			ft.setCustomAnimations(R.anim.down_in, R.anim.down_out, R.anim.up_in, R.anim.up_out);
+
+		if (fragment == null) {
+			ft.add(R.id.content_frame, tab);
+
+		} else {
+			ft.replace(R.id.content_frame, tab);
+		}
+		ft.addToBackStack(null);
+		ft.commit();
+
+	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		this.registerReceiver(mManager.myConnectivityStateReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		unregisterReceiver(mManager.myConnectivityStateReceiver);
+	}
+
 
 }
