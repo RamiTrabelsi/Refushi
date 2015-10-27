@@ -8,58 +8,56 @@ package it.neokree.materialtabs;
 
 public final class R {
 	public static final class attr {
-		public static final int accentColor = 0x7f0100d0;
-		public static final int av_action = 0x7f010019;
-		public static final int av_color = 0x7f010018;
-		public static final int hasIcons = 0x7f0100ce;
-		public static final int iconColor = 0x7f0100d1;
-		public static final int materialTabsPrimaryColor = 0x7f0100cf;
-		public static final int textColor = 0x7f0100d2;
+		public static final int accentColor = 0x7f010156;
+		public static final int av_action = 0x7f010153;
+		public static final int av_color = 0x7f010152;
+		public static final int hasIcons = 0x7f010154;
+		public static final int materialTabsPrimaryColor = 0x7f010155;
+		public static final int textColor = 0x7f010157;
 	}
 	public static final class bool {
-		public static final int isTablet = 0x7f090006;
+		public static final int isTablet = 0x7f0c0007;
 	}
 	public static final class dimen {
-		public static final int materialTextTab = 0x7f0a0035;
-		public static final int tabSelectorHeight = 0x7f0a0034;
-		public static final int tabhostHeight = 0x7f0a0033;
+		public static final int materialTextTab = 0x7f070058;
+		public static final int tabSelectorHeight = 0x7f070057;
+		public static final int tabhostHeight = 0x7f070056;
 	}
 	public static final class drawable {
-		public static final int left_arrow = 0x7f020076;
-		public static final int right_arrow = 0x7f02013b;
+		public static final int left_arrow = 0x7f02007c;
+		public static final int right_arrow = 0x7f020143;
 	}
 	public static final class id {
-		public static final int back = 0x7f080014;
-		public static final int close = 0x7f080015;
-		public static final int drawer = 0x7f080016;
-		public static final int icon = 0x7f08003d;
-		public static final int left = 0x7f08000b;
-		public static final int plus = 0x7f080017;
-		public static final int reveal = 0x7f08008a;
-		public static final int right = 0x7f08000c;
-		public static final int selector = 0x7f08008c;
-		public static final int text = 0x7f08008b;
+		public static final int back = 0x7f0b0046;
+		public static final int close = 0x7f0b0047;
+		public static final int drawer = 0x7f0b0048;
+		public static final int icon = 0x7f0b0052;
+		public static final int left = 0x7f0b000c;
+		public static final int plus = 0x7f0b0049;
+		public static final int reveal = 0x7f0b00aa;
+		public static final int right = 0x7f0b000d;
+		public static final int selector = 0x7f0b00ac;
+		public static final int text = 0x7f0b00ab;
 	}
 	public static final class integer {
-		public static final int av_animationDuration = 0x7f070003;
-		public static final int rcv_animationDurationHide = 0x7f070001;
-		public static final int rcv_animationDurationReveal = 0x7f070002;
+		public static final int av_animationDuration = 0x7f0a0008;
+		public static final int rcv_animationDurationHide = 0x7f0a0006;
+		public static final int rcv_animationDurationReveal = 0x7f0a0007;
 	}
 	public static final class layout {
-		public static final int material_tab = 0x7f030027;
-		public static final int material_tab_icon = 0x7f030028;
-		public static final int tab = 0x7f03002f;
-		public static final int tab_icon = 0x7f030030;
+		public static final int material_tab = 0x7f03002a;
+		public static final int material_tab_icon = 0x7f03002b;
+		public static final int tab = 0x7f03003d;
+		public static final int tab_icon = 0x7f03003e;
 	}
 	public static final class styleable {
-		public static final int[] ActionView = { 0x7f010018, 0x7f010019 };
+		public static final int[] ActionView = { 0x7f010152, 0x7f010153 };
 		public static final int ActionView_av_action = 1;
 		public static final int ActionView_av_color = 0;
-		public static final int[] MaterialTabHost = { 0x7f0100ce, 0x7f0100cf, 0x7f0100d0, 0x7f0100d1, 0x7f0100d2 };
+		public static final int[] MaterialTabHost = { 0x7f010154, 0x7f010155, 0x7f010156, 0x7f010157 };
 		public static final int MaterialTabHost_accentColor = 2;
 		public static final int MaterialTabHost_hasIcons = 0;
-		public static final int MaterialTabHost_iconColor = 3;
 		public static final int MaterialTabHost_materialTabsPrimaryColor = 1;
-		public static final int MaterialTabHost_textColor = 4;
+		public static final int MaterialTabHost_textColor = 3;
 	}
 }
