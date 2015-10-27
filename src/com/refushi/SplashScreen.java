@@ -1,6 +1,8 @@
 package com.refushi;
 
 
+import java.util.ArrayList;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,6 +66,8 @@ public class SplashScreen extends Activity {
 		RefushiRestClient mClient = new RefushiRestClient(mManager.getAccessToken());
 		mClient.get(RefushiRestClient.URL_CATEGORY, null, new JsonHttpResponseHandler(){
 
+			ArrayList<Category> allCategories=new ArrayList<Category>();
+			
 			@Override
 			public void onStart() {
 
@@ -97,9 +101,12 @@ public class SplashScreen extends Activity {
 
 						Log.e("22222222","2222222222" +mCategory.toString());
 						Log.e("22222	","2222222222" +mCategory.toString());
-
+						allCategories.add(mCategory);
+						
 					}
-
+					
+				    mManager.setAllCategories(allCategories);
+					
 					Intent intent = new Intent(SplashScreen.this, IntroActivity.class);
 					startActivity(intent);
 					overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -138,7 +145,6 @@ public class SplashScreen extends Activity {
 		super.onPause();
 		unregisterReceiver(mManager.myConnectivityStateReceiver);
 	}
-
 
 
 

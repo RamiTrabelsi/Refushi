@@ -11,7 +11,10 @@ import org.joda.time.DateTime;
 import org.joda.time.Period;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -37,9 +40,14 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import cn.pedant.SweetAlert.SweetAlertDialog.OnSweetClickListener;
 
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+import com.refushi.LoginActivity;
+import com.refushi.MainActivity;
 import com.refushi.R;
 import com.refushi.adapter.CategoriesGridAdapter;
 import com.refushi.model.Category;
+import com.refushi.model.User;
 
 
 public class RefushiManager {
@@ -122,6 +130,127 @@ public class RefushiManager {
 		}
 	}
 
+	
+	public void login (final Context ctx,String email, String password)  {
+
+
+		RequestParams params = new RequestParams();
+
+		params.put("data[Consumer][email]", email);
+		params.put("data[Consumer][password]", password);
+
+		RefushiRestClient mClient = new RefushiRestClient(accessToken);
+
+
+		mClient.post(RefushiRestClient.URL_LOGIN, params, new JsonHttpResponseHandler(){
+
+			SweetAlertDialog loading ;
+
+			@Override
+			public void onStart() {
+
+				loading = new SweetAlertDialog(ctx, SweetAlertDialog.PROGRESS_TYPE);
+				loading.setCancelable(false);
+				loading.setTitleText("Connexion...");
+				loading.getProgressHelper().setBarColor(ctx.getResources().getColor(R.color.black));
+
+				loading.setOnShowListener(new DialogInterface.OnShowListener() {
+					@Override
+					public void onShow(DialogInterface dialog) {
+						SweetAlertDialog alertDialog = (SweetAlertDialog) dialog;
+						TextView text = (TextView) alertDialog.findViewById(R.id.title_text);
+						text.setTextSize(TypedValue.COMPLEX_UNIT_SP,17);
+						text.setTypeface(RefushiFonts.getPetitaBold());
+						text.setGravity(Gravity.CENTER);
+
+					}
+				});
+
+				loading.show();
+				};
+				
+				@Override
+				public void onFailure(Throwable arg0, String arg1) {
+					// TODO Auto-generated method stub
+					super.onFailure(arg0, arg1);
+					
+					
+					//Log.e("RESPONSE", "failure with msg : "+response.);
+	                
+					loading.setTitleText("Opération non aboutie ! ")
+					.setConfirmText("OK")
+					.changeAlertType(SweetAlertDialog.ERROR_TYPE);
+				}
+
+			
+				
+				
+			@Override
+			public void onSuccess(int arg0, JSONObject response) {
+
+				try {
+
+						loading.dismiss();
+						//						showSuccessPopup(ctx, "Opration aboutie avec succs !");
+						Log.e("RESPONSE", "success with msg : "+response);
+
+						User user = new User();
+                        
+						
+						JSONObject json = response.getJSONObject("result");
+						JSONObject myResponse = json.getJSONObject("Consumer");
+
+						user.setId(myResponse.getString("id"));
+						user.setLast_name(myResponse.getString("last_name"));
+						user.setFirst_name(myResponse.getString("first_name"));
+						user.setEmail(myResponse.getString("email"));
+						user.setPassword(myResponse.getString("password"));
+						
+						try{
+							user.setActive("true".equalsIgnoreCase(myResponse.getString("active")));
+						} catch (JSONException e) {
+							e.printStackTrace();
+							//							showWarning(ctx, "Opration non aboutie ! ");
+						}
+
+					//	setAccessToken(user.getToken());
+					//	setUser(user);
+												ctx.startActivity(new Intent((Activity)ctx, MainActivity.class));
+												((Activity)ctx).finish();
+
+					//	getAllCharts(ctx, user.getUserId());
+
+//						Intent GoToMainActivity = new Intent((Activity)context, MainActivity.class);
+//						startActivity(GoToMainActivity);
+					
+					} catch (JSONException e) {
+					e.printStackTrace();
+
+					showWarning(ctx, "Opération non aboutie ! ");
+				}}
+
+			public void onFinish() {
+				Log.e("RESPONSE", "finish ");
+			};
+			
+		});
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
 	public BroadcastReceiver myConnectivityStateReceiver = new BroadcastReceiver(){
 
 		@Override
